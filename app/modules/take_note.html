@@ -1,0 +1,27 @@
+<dom-module id="take-note">
+
+    <style>
+
+    </style>
+
+    <template>
+
+        <!-- Main Content -->
+        <div class="content">
+            <iron-pages attr-for-selected="data-route" selected="[[route]]">
+
+                <div data-route="home"><page-home></page-home></div>
+                <div data-route="signin"><page-signin></page-signin></div>
+
+            </iron-pages>
+        </div>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: "take-note"
+        });
+    </script>
+
+</dom-module>

@@ -1,0 +1,26 @@
+<script src="../bower_components/page/page.js"></script>
+<script>
+window.addEventListener('WebComponentsReady', function() {
+
+    var app = document.querySelector('take-note');
+
+    function scrollToTop(ctx, next) {
+        // app.scrollPageToTop();
+        next();
+    }
+
+    function setRoute(route) {
+        app.route = route;
+    };
+
+    // Routes
+    page('/', scrollToTop, setRoute.bind(this, 'home'));
+    page('/sign_in', scrollToTop, setRoute.bind(this, 'signin'));
+
+    // add #! before urls
+    page({
+        hashbang: false
+    });
+
+});
+</script>

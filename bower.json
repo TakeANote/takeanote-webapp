@@ -1,0 +1,25 @@
+{
+  "name": "frontend",
+  "private": "true",
+  "authors": [
+    "Thomas Chafiol <thomaschaf@gmail.com>"
+  ],
+  "description": "Front end of take a note app",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.1.0",
+    "webcomponentsjs": "~0.7.20",
+    "page": "^1.6.4",
+    "iron-pages": "PolymerElements/iron-pages#^1.0.5"
+  }
+}
