@@ -74,7 +74,7 @@ gulp.task('serve', function() {
             }
         }
     });
-    gulp.watch(['app/**/*.html', 'app/index.html', 'app/**/*.less', 'app/**/*.js'], ['build', browserSync.reload]);
+    gulp.watch(['app/**/*.html', 'app/index.html', 'app/**/*.css', 'app/**/*.js'], ['build', browserSync.reload]);
 });
 
 gulp.task('default', ['build', 'serve']);

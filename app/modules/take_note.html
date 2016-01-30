@@ -2,19 +2,42 @@
 
     <style>
 
+        paper-toolbar {
+            background-color: #F9FFB8;
+        }
+
+        .content {
+            margin-top: 30px;
+        }
+
+        .brand {
+            font-size: 25px;
+            font-weight: 700;
+            margin-left: 30px;
+        }
+
     </style>
 
     <template>
 
-        <!-- Main Content -->
-        <div class="content">
-            <iron-pages attr-for-selected="data-route" selected="[[route]]">
+        <paper-header-panel class="flex">
 
-                <div data-route="home"><page-home></page-home></div>
-                <div data-route="signin"><page-signin></page-signin></div>
+            <!-- Header -->
+            <paper-toolbar>
+                <div class="girly brand">Take a Note!</div>
+            </paper-toolbar>
 
-            </iron-pages>
-        </div>
+            <!-- Main Content -->
+            <div class="content">
+                <iron-pages attr-for-selected="data-route" selected="[[route]]">
+
+                    <div data-route="home"><page-home></page-home></div>
+                    <div data-route="signin"><page-signin></page-signin></div>
+
+                </iron-pages>
+            </div>
+
+        </paper-header-panel>
 
     </template>
 

@@ -2,11 +2,63 @@
 
     <style>
 
+        .form {
+            border: 1px solid #ededf0;
+            border-bottom: 1px solid #dcdce0;
+            /*border: solid 1px grey;*/
+            background-color: #fefefe;
+            box-shadow: 0px 2px 6px 0 rgba(0,0,0,0.24);
+            color: #212121;
+        }
+
+        .submit {
+            margin-bottom: 10px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .submit paper-button {
+            border-radius: 0;
+        }
+
     </style>
 
     <template>
 
-        <div class="">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-6 col-sm-offset-3 form">
+
+                    <!-- Username -->
+                    <div class="row">
+
+                        <div class="col-md-8 col-md-offset-2">
+                            <paper-input label="Username"></paper-input>
+                        </div>
+
+                    </div>
+
+                    <!-- Email -->
+                    <div class="row">
+
+                        <div class="col-md-8 col-md-offset-2">
+                            <paper-input type="password" label="Password"></paper-input>
+                        </div>
+
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="row submit">
+
+                        <paper-button>Submit</paper-button>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
