@@ -1,4 +1,4 @@
-<dom-module id="page-signin">
+<dom-module id="page-profil">
 
     <style>
 
@@ -12,23 +12,20 @@
         }
 
         .submit {
-            margin-bottom: 10px;
-            margin-top: 10px;
+            margin-top: 20px;
             text-align: center;
-        }
-
-        .submit paper-button {
-            border-radius: 0;
         }
 
     </style>
 
     <template>
 
+        <iron-ajax auto url="/api/user.json" on-response="handleResponse" handle-as="json" last-response="{{user}}" debounce-duration="300"></iron-ajax>
+
         <section class="container">
 
             <div class="row">
-                <h1 class="col-sm-6 col-sm-offset-3">Sign in</h1>
+                <h1 class="col-sm-6 col-sm-offset-3">Edit profil</h1>
             </div>
 
             <div class="row">
@@ -37,27 +34,35 @@
 
                     <form>
 
-                        <!-- Username -->
+                        <!-- Profil picture -->
                         <div class="row">
 
                             <div class="col-md-8 col-md-offset-2">
-                                <paper-input label="Username"></paper-input>
+                                <img src="{{ user.profil_picture }}" alt="Profil picture of {{ user.display_name }}" />
                             </div>
 
                         </div>
 
-                        <!-- Email -->
+                        <!-- User displayed name -->
                         <div class="row">
 
                             <div class="col-md-8 col-md-offset-2">
-                                <paper-input type="password" label="Password"></paper-input>
+                                <paper-input label="Name" value="{{ user.display_name }}"></paper-input>
                             </div>
 
+                        </div>
+
+                        <!-- User email -->
+                        <div class="row">
+
+                            <div class="col-md-8 col-md-offset-2">
+                                <paper-input label="Email" value="{{ user.email }}"></paper-input>
+                            </div>
                         </div>
 
                         <!-- Submit -->
                         <div class="row submit">
-                            <paper-button on-click="signIn">Submit</paper-button>
+                            <paper-button>Update profil</paper-button>
                         </div>
 
                     </form>
@@ -72,11 +77,11 @@
 
     <script>
         Polymer({
-            is: "page-signin",
+            is: "page-profil",
 
-            signIn: function() {
-                console.log("sign in");
-                page.redirect('/notes');
+            handleResponse: function(e) {
+                console.log("response");
+                console.log(e);
             }
 
         });
