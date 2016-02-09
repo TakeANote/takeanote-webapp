@@ -33,6 +33,8 @@
 
                     <div data-route="home"><page-home></page-home></div>
                     <div data-route="signin"><page-signin></page-signin></div>
+                    <div data-route="notes"><page-notes></page-notes></div>
+                    <div data-route="note"><page-note id="{{params.id}}"></page-note></div>
                     <div data-route="profil"><page-profil></page-profil></div>
 
                 </iron-pages>
@@ -44,7 +46,13 @@
 
     <script>
         Polymer({
-            is: "take-note"
+            is: "take-note",
+
+            setRoute(ctx, route) {
+                this.params = ctx.params;
+                this.route = route;
+            }
+
         });
     </script>
 

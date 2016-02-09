@@ -4,9 +4,9 @@ var gulp        = require('gulp'),
     browserSync = require('browser-sync'),
     concat      = require('gulp-concat'),
     minifyCss   = require('gulp-minify-css'),
-    url         = require('url'),
     fs          = require('fs'),
     changeCase  = require('change-case'),
+    vfs         = require('vinyl-fs'),
     PORT_APP    = 5000;
 
 gulp.task('styles', function() {
@@ -45,6 +45,7 @@ gulp.task('images', function() {
 gulp.task('scripts', function() {
     gulp
     .src(['app/scripts/*.js'])
+    .pipe(concat('index.js'))
     .pipe(gulp.dest('dist/scripts'));
 });
 
@@ -54,6 +55,9 @@ gulp.task('vendor', function() {
         'bower_components/**/*'
     ])
     .pipe(gulp.dest('dist/bower_components'));
+    gulp
+    .src(['api/*'])
+    .pipe(vfs.symlink('dist/api'));
 });
 
 gulp.task('build', ['index', 'elements', 'scripts', 'vendor', 'images', 'styles']);
@@ -64,10 +68,7 @@ gulp.task('serve', function() {
         server: {
             baseDir: ['dist'],
             middleware: function(req, res, next) {
-                var fileName = url.parse(req.url).path;
-                var fileExists = fs.existsSync('./app/modules/pages/' + changeCase.camelCase(fileName) + '.html');
-
-                if (fileExists) {
+                if (!fs.existsSync('./dist' + req.url)) {
                     req.url = '/index.html';
                 }
                 return next();

@@ -2,20 +2,35 @@
 <script>
 window.addEventListener('WebComponentsReady', function() {
 
-    var app = document.querySelector('take-note');
+    var app = document.querySelector("#app");
 
+    // Middleware
     function scrollToTop(ctx, next) {
         // app.scrollPageToTop();
         next();
     }
 
+    function authRequired(ctx, next) {
+        if (!app.isLogged())
+            page.redirect('/sign_in');
+        next();
+    }
+
     function setRoute(route) {
-        app.route = route;
-    };
+        return function(ctx, next) {
+            app.setRoute(ctx, route);
+            next();
+        }
+    }
 
     // Routes
-    page('/', scrollToTop, setRoute.bind(this, 'home'));
-    page('/sign_in', scrollToTop, setRoute.bind(this, 'signin'));
+    page('/', scrollToTop, setRoute('home'));
+    page('/sign_in', scrollToTop, setRoute('signin'));
+
+    // Auth Routes
+    page('/notes', scrollToTop, authRequired, setRoute('notes'));
+    page('/note/:id', scrollToTop, authRequired, setRoute('note'));
+    page('/profil', scrollToTop, authRequired, setRoute('profil'));
 
     // add #! before urls
     page({

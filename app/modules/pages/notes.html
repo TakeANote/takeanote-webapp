@@ -1,0 +1,95 @@
+<dom-module id="page-notes">
+
+    <style>
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        hr:not(:last-of-type) {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        hr:last-of-type {
+            display: none;
+        }
+
+        .note-container {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+
+    <template>
+
+        <iron-ajax auto url="/api/notes.json" on-response="handleResponse" handle-as="json" last-response="{{notes}}" debounce-duration="300"></iron-ajax>
+
+        <section class="container">
+
+            <div class="row">
+                <h1 class="col-sm-6 col-sm-offset-3">Here are the notes</h1>
+            </div>
+
+            <template is="dom-repeat" items="[[createRange(notes.length, 4)]]">
+
+                <div class="row notes">
+
+                    <template is="dom-repeat" items="[[createRangeFromObject(notes, item, 4)]]">
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 note-container">
+                            <tn-note data="{{item}}"></tn-note>
+                        </div>
+
+                    </template>
+
+                </div>
+
+                <hr>
+
+            </template>
+
+        </section>
+
+        <section id="overlay" class="container overlay">
+
+        </section>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: "page-notes",
+
+            handleResponse: function(e) {
+                console.log("response");
+                console.log(e);
+            },
+
+            createRangeFromObject: function(objects, istart, step) {
+                var range = [];
+                console.log(istart);
+                console.log("============");
+                for (i = istart; i < istart + step; i++) {
+                    var object = objects[i];
+                    if (object)
+                        range.push(object);
+                }
+                return range;
+            },
+
+            createRange: function(length, step) {
+                var range = [];
+                for (i = 0; i < length; i=i+step) {
+                    console.log(i);
+                    range.push(i);
+                }
+                return range;
+            }
+        });
+    </script>
+
+</dom-module>

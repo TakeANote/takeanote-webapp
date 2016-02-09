@@ -1,0 +1,55 @@
+<dom-module id="page-note">
+
+    <style>
+
+    </style>
+
+    <template>
+
+        <iron-ajax auto url="/api/note/{{id}}.json" on-response="handleResponse" handle-as="json" last-response="{{note}}" debounce-duration="300"></iron-ajax>
+
+
+
+        <section class="container">
+
+            <div class="row">
+                <h1 class="col-sm-6 col-sm-offset-3">Note</h1>
+            </div>
+
+
+            <form class="" action="index.html" method="post">
+
+                <div class="row">
+                    <textarea id="content"></textarea>
+                </div>
+
+                <div class="row">
+                    <paper-button>Submit</paper-button>
+                </div>
+
+            </form>
+
+
+        </section>
+
+
+    </template>
+
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea', menubar: false });</script>
+    <script>
+        Polymer({
+            is: "page-note",
+
+            properties: {
+                id: Number
+            },
+
+            handleResponse: function() {
+                tinymce.get('content').setContent(this.note.content);
+                console.log("response");
+            }
+        });
+    </script>
+
+</dom-module>
