@@ -1,0 +1,52 @@
+<dom-module id="page-friends">
+
+    <style>
+
+    </style>
+
+    <template>
+
+        <iron-ajax auto url="/api/friends.json" on-response="handleResponse" handle-as="json" last-response="{{friends}}" debounce-duration="300"></iron-ajax>
+
+        <section class="container-fluid">
+
+            <div class="row">
+                <h1 class="col-sm-6 col-sm-offset-3">Here are the friends</h1>
+            </div>
+
+            <template is="dom-repeat" items="[[range(friends.length, 4)]]">
+
+                <div class="row notes">
+
+                    <template is="dom-repeat" items="[[rangeFromObject(friends, item, 4)]]">
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 note-container">
+                            <tn-friend data="{{item}}"></tn-friend>
+                        </div>
+
+                    </template>
+
+                </div>
+
+                <hr>
+
+            </template>
+
+        </section>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: "page-friends",
+
+            behaviors: [GridBehavior],
+
+            handleResponse: function() {
+                console.log("Response");
+            }
+
+        });
+    </script>
+
+</dom-module>

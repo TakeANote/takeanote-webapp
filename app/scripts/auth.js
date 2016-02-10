@@ -1,6 +1,6 @@
-(function() {
-    'use strict';
+'use strict';
 
+window.addEventListener('WebComponentsReady', function() {
     var app = document.querySelector("#app");
 
     app.login = function(key) {
@@ -14,4 +14,4 @@
     app.logout = function() {
         Cookies.remove('api-key');
     }
-})();
+});

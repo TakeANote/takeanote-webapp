@@ -8,9 +8,7 @@
 
         <iron-ajax auto url="/api/note/{{id}}.json" on-response="handleResponse" handle-as="json" last-response="{{note}}" debounce-duration="300"></iron-ajax>
 
-
-
-        <section class="container">
+        <section class="container-fluid">
 
             <div class="row">
                 <h1 class="col-sm-6 col-sm-offset-3">Note</h1>
@@ -36,7 +34,7 @@
     </template>
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script>tinymce.init({ selector:'textarea', menubar: false });</script>
+    <script>tinymce.init({ selector:'textarea', menubar: false, statusbar: false });</script>
     <script>
         Polymer({
             is: "page-note",
@@ -46,8 +44,9 @@
             },
 
             handleResponse: function() {
-                tinymce.get('content').setContent(this.note.content);
-                console.log("response");
+                if (this.note) {
+                    tinymce.get('content').setContent(this.note.content);
+                }
             }
         });
     </script>

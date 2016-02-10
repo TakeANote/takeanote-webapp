@@ -11,8 +11,8 @@ window.addEventListener('WebComponentsReady', function() {
     }
 
     function authRequired(ctx, next) {
-        if (!app.isLogged())
-            page.redirect('/sign_in');
+        // if (!app.isLogged())
+        //     page.redirect('/sign_in');
         next();
     }
 
@@ -30,6 +30,8 @@ window.addEventListener('WebComponentsReady', function() {
     // Auth Routes
     page('/notes', scrollToTop, authRequired, setRoute('notes'));
     page('/note/:id', scrollToTop, authRequired, setRoute('note'));
+    page('/friends', scrollToTop, authRequired, setRoute('friends'));
+    page('/friend/:id', scrollToTop, authRequired, setRoute('friend'));
     page('/profil', scrollToTop, authRequired, setRoute('profil'));
 
     // add #! before urls

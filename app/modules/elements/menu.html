@@ -1,0 +1,60 @@
+<dom-module id="tn-menu">
+
+    <style>
+
+        paper-menu {
+            margin-top: 30px;
+        }
+
+        paper-menu a {
+            margin-top: 30px;
+            margin-left: 30px;
+            display: block;
+        }
+
+    </style>
+
+    <template>
+
+        <iron-ajax auto url="/api/friends.json" on-response="handleResponse" handle-as="json" last-response="{{friends}}" debounce-duration="300"></iron-ajax>
+
+        <paper-menu>
+            <a data-route="home" href="/">
+                <iron-icon icon="home"></iron-icon>
+                <span>Home</span>
+            </a>
+
+            <a data-route="profil" href="/profil">
+                <iron-icon icon="social:person"></iron-icon>
+                <span>Profil</span>
+            </a>
+
+            <a data-route="notes" href="/notes">
+                <iron-icon icon="device:dvr"></iron-icon>
+                <span>Notes</span>
+            </a>
+
+            <hr>
+
+            <a data-route="friends" href="/friends">
+                <span>{{ friends.length }}</span>
+                <span>Friends</span>
+            </a>
+
+        </paper-menu>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: "tn-menu",
+
+            handleResponse: function(e) {
+                console.log("response");
+                console.log(e);
+            }
+
+        });
+    </script>
+
+</dom-module>

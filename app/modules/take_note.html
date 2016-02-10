@@ -20,27 +20,42 @@
 
     <template>
 
-        <paper-header-panel class="flex">
+        <paper-drawer-panel>
 
-            <!-- Header -->
-            <paper-toolbar>
-                <div class="girly brand">Take a Note!</div>
-            </paper-toolbar>
+            <paper-header-panel drawer fixed>
 
-            <!-- Main Content -->
-            <div class="content">
-                <iron-pages attr-for-selected="data-route" selected="[[route]]">
+                <paper-toolbar></paper-toolbar>
 
-                    <div data-route="home"><page-home></page-home></div>
-                    <div data-route="signin"><page-signin></page-signin></div>
-                    <div data-route="notes"><page-notes></page-notes></div>
-                    <div data-route="note"><page-note id="{{params.id}}"></page-note></div>
-                    <div data-route="profil"><page-profil></page-profil></div>
+                <tn-menu></tn-menu>
 
-                </iron-pages>
-            </div>
+            </paper-header-panel>
 
-        </paper-header-panel>
+            <paper-header-panel main class="flex">
+
+                <!-- Header -->
+                <paper-toolbar>
+                    <iron-icon icon="menu" paper-drawer-toggle></iron-icon>
+
+                    <div class="girly brand">Take a Note!</div>
+                </paper-toolbar>
+
+                <!-- Main Content -->
+                <div class="content">
+                    <iron-pages attr-for-selected="data-route" selected="[[route]]">
+
+                        <div data-route="home"><page-home></page-home></div>
+                        <div data-route="signin"><page-signin></page-signin></div>
+                        <div data-route="notes"><page-notes></page-notes></div>
+                        <div data-route="note"><page-note id="{{params.id}}"></page-note></div>
+                        <div data-route="profil"><page-profil></page-profil></div>
+                        <div data-route="friends"><page-friends></page-friends></div>
+
+                    </iron-pages>
+                </div>
+
+            </paper-header-panel>
+
+        </paper-drawer-panel>
 
     </template>
 

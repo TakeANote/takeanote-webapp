@@ -1,0 +1,26 @@
+<script>
+    GridBehavior = {
+
+        rangeFromObject: function(objects, istart, step) {
+            var range = [];
+            console.log(istart);
+            console.log("============");
+            for (i = istart; i < istart + step; i++) {
+                var object = objects[i];
+                if (object)
+                    range.push(object);
+            }
+            return range;
+        },
+
+        range: function(length, step) {
+            var range = [];
+            for (i = 0; i < length; i=i+step) {
+                console.log(i);
+                range.push(i);
+            }
+            return range;
+        }
+
+    };
+</script>
