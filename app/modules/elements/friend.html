@@ -23,6 +23,7 @@
             height: 300px;
             color: white;
             border: 3px solid black;
+            z-index: 50;
         }
 
         .content:hover .overlay {
@@ -54,19 +55,37 @@
             left: 0;
         }
 
+        .img-container {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name-container {
+            text-align: center;
+        }
+
     </style>
 
     <template>
 
         <div class="content">
 
-            <div>
-                <h2>{{data.name}}</h2>
+            <div class="img-container">
+                <img src="{{data.profil_picture}}" alt="" />
             </div>
 
-            <p class="girly">
-                {{data.content}}
-            </p>
+            <div class="name-container">
+                <h2>{{data.display_name}}</h2>
+            </div>
 
             <div class="overlay">
                 <div class="open">

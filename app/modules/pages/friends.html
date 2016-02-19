@@ -2,12 +2,63 @@
 
     <style>
 
+        hr:not(:last-of-type) {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        hr:last-of-type {
+            display: none;
+        }
+
+        .icon {
+            top: 15px;
+        }
+
     </style>
 
     <template>
 
-        <iron-ajax auto url="/api/friends.json" on-response="handleResponse" handle-as="json" last-response="{{friends}}" debounce-duration="300"></iron-ajax>
+        <section class="container-fluid">
 
+            <iron-ajax id="searchUsers"
+                url="/api/users.json"
+                on-response="handleResponse"
+                handle-as="json"
+                last-response="{{users}}"
+                debounce-duration="300"
+            >
+            </iron-ajax>
+
+            <form method="post" class="row">
+
+                <paper-input class="col-sm-4 col-sm-offset-4" label="Find a friend"></paper-input>
+
+                <paper-icon-button class="icon" icon="icons:search" on-click="search"></paper-icon-button>
+
+            </form>
+
+            <template is="dom-repeat" items="[[range(users.length, 4)]]">
+
+                <div class="row">
+
+                    <template is="dom-repeat" items="[[rangeFromObject(users, item, 4)]]">
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 note-container">
+                            <tn-friend data="{{item}}"></tn-friend>
+                        </div>
+
+                    </template>
+
+                </div>
+
+                <hr>
+
+            </template>
+
+        </section>
+
+        <iron-ajax auto url="/api/friends.json" on-response="handleResponse" handle-as="json" last-response="{{friends}}" debounce-duration="300"></iron-ajax>
         <section class="container-fluid">
 
             <div class="row">
@@ -16,7 +67,7 @@
 
             <template is="dom-repeat" items="[[range(friends.length, 4)]]">
 
-                <div class="row notes">
+                <div class="row">
 
                     <template is="dom-repeat" items="[[rangeFromObject(friends, item, 4)]]">
 
@@ -44,6 +95,12 @@
 
             handleResponse: function() {
                 console.log("Response");
+                console.log(this.friends);
+            },
+
+            search: function() {
+                this.$.searchUsers.generateRequest();
+                console.log('Search');
             }
 
         });
