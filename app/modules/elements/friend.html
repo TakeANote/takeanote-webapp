@@ -36,8 +36,12 @@
             padding-top: 100px;
         }
 
-        .bottom paper-button {
-            width: 45%;
+        paper-button {
+            background: rgba(255, 255, 255, 0.6);
+            color: black;
+            font-weight: bold;
+            padding: 15px;
+            border: 2px solid black;
         }
 
         p {
@@ -89,13 +93,7 @@
 
             <div class="overlay">
                 <div class="open">
-                    <a href="/note/{{data.id}}">
-                        <paper-button>Open</paper-button>
-                    </a>
-                </div>
-                <div class="bottom">
-                    <paper-button>Edit</paper-button>
-                    <paper-button>Delete</paper-button>
+                    <paper-button>Add friend</paper-button>
                 </div>
             </div>
 

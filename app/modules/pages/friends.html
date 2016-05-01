@@ -22,21 +22,13 @@
         <section class="container-fluid">
 
             <iron-ajax id="searchUsers"
-                url="/api/users.json"
+                url="/api/friends.json"
                 on-response="handleResponse"
                 handle-as="json"
                 last-response="{{users}}"
                 debounce-duration="300"
             >
             </iron-ajax>
-
-            <form method="post" class="row">
-
-                <paper-input class="col-sm-4 col-sm-offset-4" label="Find a friend"></paper-input>
-
-                <paper-icon-button class="icon" icon="icons:search" on-click="search"></paper-icon-button>
-
-            </form>
 
             <template is="dom-repeat" items="[[range(users.length, 4)]]">
 
@@ -94,13 +86,6 @@
             behaviors: [GridBehavior],
 
             handleResponse: function() {
-                console.log("Response");
-                console.log(this.friends);
-            },
-
-            search: function() {
-                this.$.searchUsers.generateRequest();
-                console.log('Search');
             }
 
         });

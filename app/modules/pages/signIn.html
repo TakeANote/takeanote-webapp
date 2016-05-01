@@ -75,8 +75,9 @@
             is: "page-signin",
 
             signIn: function() {
-                console.log("sign in");
-                page.redirect('/notes');
+                document.querySelector("#app").login(function() {
+                    page.redirect('/notes');
+                });
             }
 
         });

@@ -6,10 +6,15 @@
             margin-top: 30px;
         }
 
+        paper-menu.hide {
+            display: none;
+        }
+
         paper-menu a {
             margin-top: 30px;
             margin-left: 30px;
             display: block;
+            color: inherit;
         }
 
     </style>
@@ -18,7 +23,7 @@
 
         <iron-ajax auto url="/api/friends.json" on-response="handleResponse" handle-as="json" last-response="{{friends}}" debounce-duration="300"></iron-ajax>
 
-        <paper-menu>
+        <paper-menu class$="{{ display }}">
             <a data-route="home" href="/">
                 <iron-icon icon="home"></iron-icon>
                 <span>Home</span>
@@ -27,6 +32,11 @@
             <a data-route="profil" href="/profil">
                 <iron-icon icon="social:person"></iron-icon>
                 <span>Profil</span>
+            </a>
+
+            <a data-route="users" href="/users">
+                <iron-icon icon="social:group"></iron-icon>
+                <span>Users</span>
             </a>
 
             <a data-route="notes" href="/notes">
@@ -49,9 +59,33 @@
         Polymer({
             is: "tn-menu",
 
+            properties: {
+                user: {
+                    type: Object,
+                    observer: "userChanged"
+                },
+
+                display: {
+                    type: String,
+                    value: "hide"
+                }
+            },
+
+            ready: function() {
+                var app = document.querySelector("#app");
+                if (app && app.isLogged && app.isLogged()) {
+                    this.display = "";
+                }
+            },
+
+            userChanged: function() {
+                if (this.user)
+                    this.display = "";
+                else
+                    this.display = "hide";
+            },
+
             handleResponse: function(e) {
-                console.log("response");
-                console.log(e);
             }
 
         });

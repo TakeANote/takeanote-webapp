@@ -1,0 +1,82 @@
+<dom-module id="page-users">
+
+    <style>
+
+        :host {
+            --paper-input-container-color: black;
+            --paper-input-container-focus-color: black;
+        }
+
+        hr:not(:last-of-type) {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        hr:last-of-type {
+            display: none;
+        }
+
+        .icon {
+            top: 15px;
+        }
+
+    </style>
+
+    <template>
+
+        <section class="container-fluid">
+
+            <iron-ajax auto url="/api/users.json" on-response="handleResponse" handle-as="json" last-response="{{users}}" debounce-duration="300"></iron-ajax>
+
+            <div class="row">
+
+                <paper-input id="search" class="col-sm-4 col-sm-offset-4" label="Find a friend" on-keyup="handleKeypress"></paper-input>
+
+                <paper-icon-button class="icon" icon="icons:search" on-click="search"></paper-icon-button>
+
+            </div>
+
+            <template is="dom-repeat" items="[[range(users_list.length, 4)]]">
+
+                <div class="row">
+
+                    <template is="dom-repeat" items="[[rangeFromObject(users_list, item, 4)]]">
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 note-container">
+                            <tn-friend data="{{item}}"></tn-friend>
+                        </div>
+
+                    </template>
+
+                </div>
+
+                <hr>
+
+            </template>
+
+        </section>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: "page-users",
+
+            behaviors: [GridBehavior],
+
+            handleResponse: function() {
+                this.users_list = this.users;
+            },
+
+            search_filter: function(value) {
+                return value.display_name.toLowerCase().startsWith(this.$.search.value);
+            },
+
+            handleKeypress: function() {
+                this.users_list = this.users.filter(this.search_filter.bind(this));
+            }
+
+        });
+    </script>
+
+</dom-module>

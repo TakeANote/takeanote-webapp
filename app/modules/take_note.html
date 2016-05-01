@@ -3,7 +3,7 @@
     <style>
 
         paper-toolbar {
-            background-color: #F9FFB8;
+            background-color: #FFEC80;
         }
 
         .content {
@@ -19,7 +19,7 @@
 
         footer {
             margin-top: 30px;
-            background-color: #F9FFB8;
+            background-color: #FFEC80;
             bottom: 0;
             width: 100%;
             height: 70px;
@@ -37,7 +37,7 @@
 
                 <paper-toolbar></paper-toolbar>
 
-                <tn-menu></tn-menu>
+                <tn-menu user="[[user]]"></tn-menu>
 
             </paper-header-panel>
 
@@ -59,6 +59,7 @@
                         <div data-route="notes"><page-notes></page-notes></div>
                         <div data-route="note"><page-note id="{{params.id}}"></page-note></div>
                         <div data-route="profil"><page-profil></page-profil></div>
+                        <div data-route="users"><page-users></page-users></div>
                         <div data-route="friends"><page-friends></page-friends></div>
 
                     </iron-pages>
@@ -79,9 +80,31 @@
         Polymer({
             is: "take-note",
 
-            setRoute(ctx, route) {
+            properties: {
+                user: {
+                    type: Object,
+                    notify: true
+                }
+            },
+
+            setRoute: function(ctx, route) {
                 this.params = ctx.params;
                 this.route = route;
+            },
+
+            login: function(callback) {
+                console.log("LOGIN");
+                app.set('user', {name: "toto"});
+                Cookies.set('api-key', 'rjfdscn');
+                callback();
+            },
+
+            isLogged: function() {
+                return (Cookies.get('api-key') !== undefined);
+            },
+
+            logout: function() {
+                Cookies.remove('api-key');
             }
 
         });

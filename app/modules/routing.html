@@ -30,6 +30,7 @@ window.addEventListener('WebComponentsReady', function() {
     // Auth Routes
     page('/notes', scrollToTop, authRequired, setRoute('notes'));
     page('/note/:id', scrollToTop, authRequired, setRoute('note'));
+    page('/users', scrollToTop, authRequired, setRoute('users'));
     page('/friends', scrollToTop, authRequired, setRoute('friends'));
     page('/friend/:id', scrollToTop, authRequired, setRoute('friend'));
     page('/profil', scrollToTop, authRequired, setRoute('profil'));
